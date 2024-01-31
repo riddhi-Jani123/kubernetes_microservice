@@ -27,7 +27,7 @@ public class OrderService {
         Payment payment= transactionRequest.getPayment();
         payment.setOrderId(order.getId());
         payment.setAmount(order.getPrice());
-        Payment paymentResponse = template.postForObject("http://PAYMENT-SERVICE/payment/addPayment", payment, payment.getClass());
+        Payment paymentResponse = template.postForObject("http://payment-service-svc.default.svc.cluster.local:9091/payment/addPayment", payment, payment.getClass());
         message = paymentResponse.getPaymentStatus().equalsIgnoreCase("Success")?"Payment Successfully and order placed":"Payment Failure , Order added to cart";
         orderRepository.save(order);
         return new TransactionResponse(order, paymentResponse.getTransactionId(),paymentResponse.getAmount(), message);
@@ -38,7 +38,7 @@ public class OrderService {
         List<Order> orderList = orderRepository.findAll();
         orderList.stream().forEach(order -> {
             String message = "";
-            Payment paymentResponse = template.getForObject("http://PAYMENT-SERVICE/payment/"+order.getId(), Payment.class);
+            Payment paymentResponse = template.getForObject("http://payment-service-svc.default.svc.cluster.local:9091/payment/"+order.getId(), Payment.class);
             message = paymentResponse.getPaymentStatus().equalsIgnoreCase("Success")?"Payment Successfully and order placed":"Payment Failure , Order added to cart";
             transactionResponses.add(new TransactionResponse(order, paymentResponse.getTransactionId(),paymentResponse.getAmount(), message));
         });

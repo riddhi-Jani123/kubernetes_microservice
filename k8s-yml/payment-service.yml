@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: payment-service-app
-          image: riddhijani/payment-service:1.0
+          image: riddhijani/payment-service:2.0
           imagePullPolicy: Always
           ports:
             - containerPort: 9091

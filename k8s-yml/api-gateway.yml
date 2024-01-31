@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: api-gateway-app
-          image: riddhijani/api-gateway:1.0
+          image: riddhijani/api-gateway:2.0
           imagePullPolicy: Always
           ports:
             - containerPort: 8989

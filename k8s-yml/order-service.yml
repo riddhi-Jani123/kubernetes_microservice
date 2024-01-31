@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: order-service-app
-          image: riddhijani/order-service:1.0
+          image: riddhijani/order-service:2.0
           imagePullPolicy: Always
           ports:
             - containerPort: 9092
